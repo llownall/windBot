@@ -1,0 +1,14 @@
+{% extends 'base_user.html' %}
+
+{% block spots_create_link_class %}{% if is_create %} active{% endif %}{% endblock %}
+
+{% block main %}
+  <form method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

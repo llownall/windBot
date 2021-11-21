@@ -1,0 +1,38 @@
+{% extends 'base_user.html' %}
+
+{% block spots_list_link_class %} active{% endblock %}
+
+{% block main %}
+  <h1 class="page_title">Споты</h1>
+
+  {% if object_list %}
+    <ul>
+      {% for spot in object_list %}
+        <li>
+          {{ spot }}
+
+          <a
+            href="{% url 'spots_update' spot.pk %}"
+          >Редактировать</a>
+
+          |
+
+          <a
+            href="{% url 'conditions_list' spot.pk %}"
+          >Условия</a>
+
+          |
+
+          <a
+            href="{% url 'conditions_create' spot.pk %}"
+          >Добавить условие</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    Спотов пока нет.
+  {% endif %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

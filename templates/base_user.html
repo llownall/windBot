@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <header class="sticky-top">
+    <nav class="navbar navbar-expand-sm navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand mb-0 h1" href="#">Wind Bot</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+            <li class="nav-item">
+              <a class="nav-link{% block spots_list_link_class %}{% endblock %}" aria-current="page" href="{% url 'spots_list' %}">Споты</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link{% block spots_create_link_class %}{% endblock %}" href="{% url 'spots_create' %}">Добавить спот</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link{% block settings_link_class %}{% endblock %}" href="{% url 'settings' %}">Настройки</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+{% endblock %}

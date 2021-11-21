@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+  {% if form.errors %}
+    <p>Твои Имя пользователя и Пароль не найдены. Попробуй еще раз.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Твой аккаунт не имеет доступа к этой странице. Чтобы продолжить,
+        войди в аккаунт с достаточными правами.</p>
+    {% else %}
+      <p>Войди, чтобы увидеть эту страницу.</p>
+    {% endif %}
+  {% endif %}
+
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <td>{{ form.username.label_tag }}</td>
+        <td>{{ form.username }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.password.label_tag }}</td>
+        <td>{{ form.password }}</td>
+      </tr>
+    </table>
+
+    <input type="submit" value="login">
+    <input type="hidden" name="next" value="{{ next }}">
+  </form>
+
+  <p><a href="{% url 'password_reset' %}">Потерял пароль?</a></p>
+
+{% endblock %}

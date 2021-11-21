@@ -1,0 +1,30 @@
+{% extends 'base_user.html' %}
+
+{% block main %}
+  <h1 class="page_title">Условия для спота</h1>
+
+  {% if object_list %}
+    <ul>
+      {% for condition in object_list %}
+        <li>
+          {{ condition }}
+
+          <a
+            href="{% url 'conditions_update' view.kwargs.spot_id condition.pk %}"
+          >Редактировать</a>
+{##}
+{#          |#}
+{##}
+{#          <a#}
+{#            href="{% url 'spots_update' spot.pk %}"#}
+{#          >Условия</a>#}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    Условий пока нет.
+  {% endif %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

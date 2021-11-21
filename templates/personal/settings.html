@@ -1,0 +1,88 @@
+{% extends 'base_user.html' %}
+
+{% block settings_link_class %} active{% endblock %}
+
+{% block head %}
+  <style>
+      .settings_panel {
+          padding: 16px 24px;
+          background-color: white;
+          border-radius: 8px;
+          box-shadow: 0 0 10px #d7d7d7;
+      }
+
+      .settings_panel__title {
+          padding: 0 12px;
+          font-size: 1.5rem;
+          font-weight: 500;
+      }
+
+      .settings_panel__body {
+          margin: 12px 0 0;
+          font-size: 1.2rem;
+      }
+
+      .settings_panel__actions {
+      }
+
+      .settings_panel__body li {
+          margin: 12px 0;
+      }
+
+      .variant {
+          margin: 0 4px;
+          padding: 4px 8px;
+          background-color: #dadada;
+          border-radius: 8px;
+      }
+
+      .variant:first-of-type {
+          margin: 0 4px 0 0;
+      }
+
+      .variant.success {
+          background-color: #aadea3;
+      }
+
+      .variant.error {
+          background-color: #dcacac;
+      }
+
+      .invite_code {
+          margin: 4px 6px;
+          padding: 4px 8px;
+          background-color: #b5d3ec;
+          border-radius: 8px;
+          font-size: 1.2em;
+          font-weight: 500;
+      }
+  </style>
+{% endblock %}
+
+{% block main %}
+  <h1 class="page_title">Настройки</h1>
+
+  <div class="settings_panel">
+    <div class="settings_panel__title">
+      Связь с аккаунтом Telegram {% if user.person.has_telegram %}
+      <span class="variant success"> установлена</span>{% else %}
+      <span class="variant error">не установлена</span>{% endif %}
+    </div>
+
+    {% if not user.person.has_telegram %}
+      <div class="settings_panel__body">
+        Нажми на <a href="{{ invite_link }}" target="_blank">эту ссылку</a> или:
+        <ul>
+          <li>В Telegram найди бота @WindCatcherBot</li>
+          <li><span class="variant">Запусти его</span> или <span class="variant">Нажми кнопку Старт</span> или <span
+            class="variant">Введи команду /start</span></li>
+          <li>Введи код <span class="invite_code">{{ code }}</span></li>
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
