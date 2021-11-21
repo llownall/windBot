@@ -13,33 +13,32 @@ services:
     image: redis
     ports:
       - "6379:6379"
-  celery:
-    build: .
-    command: celery -A windBot worker -l INFO
-    volumes:
-      - ./:/usr/src/app/
-    depends_on:
-      - redis
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    image: app
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./:/usr/src/app/
     ports:
-      - "8000:8000"
+      - "80:8000"
     env_file:
       - ./.env.prod
     depends_on:
       - db
+  celery:
+    image: app
+    command: celery -A windBot worker -l INFO
+    depends_on:
       - redis
-      - celery
+      - web
   bot:
-    build: .
+    image: app
     command: python start_polling.py
     env_file:
       - ./.env.prod
     depends_on:
       - web
+      - celery
 
 volumes:
   postgres_data:
