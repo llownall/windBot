@@ -13,10 +13,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: WindBot Deploy
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+        uses: llownall/checkout-deploy@v0.1.0
         with:
           username: root
           server: windbot.ru
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: ./*
           remote_path: /home/windBot
