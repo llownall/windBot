@@ -31,6 +31,12 @@ services:
     depends_on:
       - redis
       - web
+  celery-beat:
+    image: app
+    command: celery -A windBot beat -l INFO
+    depends_on:
+      - redis
+      - web
   bot:
     image: app
     command: python start_polling.py
