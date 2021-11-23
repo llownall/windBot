@@ -21,7 +21,7 @@ from django.urls import path, include
 
 
 def root_view(request):
-    return render(request, 'base_user.html')
+    return render(request, 'index.html')
 
 
 urlpatterns = [

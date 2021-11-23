@@ -64,9 +64,9 @@
 
   <div class="settings_panel">
     <div class="settings_panel__title">
-      Связь с аккаунтом Telegram {% if user.person.has_telegram %}
-      <span class="variant success"> установлена</span>{% else %}
-      <span class="variant error">не установлена</span>{% endif %}
+      Аккаунт Telegram {% if user.person.has_telegram %}
+      <span class="variant success"> привязан</span>{% else %}
+      <span class="variant error">не привязан</span>{% endif %}
     </div>
 
     {% if not user.person.has_telegram %}

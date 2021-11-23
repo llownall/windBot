@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block base_styles %}
+  {{ block.super }}
+
+  <style>
+      html, body {
+          height: 100%;
+      }
+
+      body {
+          display: flex;
+          flex-direction: column;
+      }
+
+      main {
+          padding-bottom: 5%;
+
+          flex: 1 1 auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          text-align: center;
+      }
+
+      footer {
+          padding-bottom: 24px;
+
+          display: flex;
+          justify-content: center;
+      }
+
+      .login {
+          font-size: 1.2rem;
+          font-weight: bolder;
+      }
+  </style>
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+  <div>
+    <h2
+    >Ветряной</h2>
+
+    <h1
+    >БОТ</h1>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  <div
+    class="login"
+  >
+    <a
+      href = {% url 'login' %}
+    >Войти</a>
+  </div>
+{% endblock %}
