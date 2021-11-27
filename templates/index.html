@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-{% block base_styles %}
-  {{ block.super }}
-
+{% block head %}
   <style>
       html, body {
           height: 100%;
@@ -38,9 +36,6 @@
   </style>
 {% endblock %}
 
-{% block head %}
-{% endblock %}
-
 {% block header %}
 {% endblock %}
 
@@ -59,7 +54,7 @@
     class="login"
   >
     <a
-      href = {% url 'login' %}
+      href={% if user.is_authenticated %}{% url 'spots_list' %}{% else %}{% url 'login' %}{% endif %}
     >Войти</a>
   </div>
 {% endblock %}

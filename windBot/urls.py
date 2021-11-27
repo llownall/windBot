@@ -20,12 +20,12 @@ from django.shortcuts import render
 from django.urls import path, include
 
 
-def root_view(request):
+def index_view(request):
     return render(request, 'index.html')
 
 
 urlpatterns = [
-    path('', root_view),
+    path('', index_view),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
 
