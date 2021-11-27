@@ -28,12 +28,16 @@ services:
   celery:
     image: app
     command: celery -A windBot worker -l INFO
+    env_file:
+      - ./.env.prod
     depends_on:
       - redis
       - web
   celery-beat:
     image: app
     command: celery -A windBot beat -l INFO
+    env_file:
+      - ./.env.prod
     depends_on:
       - redis
       - web

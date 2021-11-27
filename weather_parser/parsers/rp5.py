@@ -92,7 +92,12 @@ class RP5Parser(BaseParser):
 
             # is_raining = td_rains[index].div.div['class'] != ['wp_0']
             temperature = int(td_temperatures[index].div.get_text())
-            min_wind_speed = int(td_wind_min_speed[index].div.get_text())
+
+            try:
+                min_wind_speed = int(td_wind_min_speed[index].div.get_text())
+            except:
+                min_wind_speed = 0
+
             if td_wind_max_speed[index].div.get_text() == '':
                 max_wind_speed = min_wind_speed
             else:
@@ -115,7 +120,7 @@ class RP5Parser(BaseParser):
                 temperature=temperature,
                 wind_speed_min=min_wind_speed,
                 wind_speed_max=max_wind_speed,
-                wind_direction=WIND_DIRECTION_MAPPINGS[direction],
+                wind_direction=WIND_DIRECTION_MAPPINGS.get(direction, WindDirection.NO_WIND),
                 forecast_day=forecast_day,
                 spot=spot,
             )

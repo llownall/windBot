@@ -16,6 +16,7 @@ from personal.models import Person
 
 
 class WindDirection(models.IntegerChoices):
+    NO_WIND = 0, _('Штиль')
     N = 1, _('Север')
     NE = 2, _('Северо-Восток')
     E = 3, _('Восток')
