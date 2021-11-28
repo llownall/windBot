@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/view.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/panel.css' %}">
+{% endblock %}
+
 {% block header %}
   <header class="sticky-top">
     <nav class="navbar navbar-expand-sm navbar-light">

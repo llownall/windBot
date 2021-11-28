@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.urls import path
 
-from spots.views import SpotList, SpotCreateView, SpotUpdateView, ConditionList, ConditionCreateView, \
-    ConditionUpdateView
+from spots.views import SpotList, SpotCreateView, SpotUpdateView, SpotDeleteView, ConditionList, ConditionCreateView, \
+    ConditionUpdateView, ConditionDeleteView
 
 urlpatterns = [
     path('', SpotList.as_view(), name='spots_list'),
     path('create/', SpotCreateView.as_view(), name='spots_create'),
     path('<int:pk>/update/', SpotUpdateView.as_view(), name='spots_update'),
+    path('<int:pk>/delete/', SpotDeleteView.as_view(), name='spots_delete'),
 
     path('<int:spot_id>/conditions/', ConditionList.as_view(), name='conditions_list'),
     path('<int:spot_id>/conditions/create/', ConditionCreateView.as_view(), name='conditions_create'),
     path('<int:spot_id>/conditions/<int:pk>/update/', ConditionUpdateView.as_view(), name='conditions_update'),
+    path('<int:spot_id>/conditions/<int:pk>/delete/', ConditionDeleteView.as_view(), name='conditions_delete'),
 ]

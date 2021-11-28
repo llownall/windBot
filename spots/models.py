@@ -1,5 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
 # rp5_directions = {
@@ -77,6 +79,7 @@ class Forecast(models.Model):
 
 
 class Condition(models.Model):
+    sequence_number = models.IntegerField(null=True)
     is_active = models.BooleanField()
     spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
 
@@ -96,3 +99,17 @@ class Condition(models.Model):
 
     def __str__(self):
         return f'<Condition: {self.spot}>'
+
+
+@receiver(post_save, sender=Condition)
+def create_condition(sender, instance: Condition, created: bool, **kwargs):
+    if created:
+        newest_user_condition = Condition.objects.filter(
+            spot=instance.spot, sequence_number__isnull=False
+        ).last()
+        if not newest_user_condition or not newest_user_condition.sequence_number:
+            last_number = 0
+        else:
+            last_number = newest_user_condition.sequence_number
+        instance.sequence_number = last_number + 1
+        instance.save()

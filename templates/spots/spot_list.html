@@ -1,38 +1,45 @@
 {% extends 'base_user.html' %}
 
+{% load static %}
+
 {% block spots_list_link_class %} active{% endblock %}
 
 {% block main %}
-  <h1 class="page_title">Споты</h1>
+  <div class="view">
+    <div class="view__title">
+      <h1>Твои Споты</h1>
+    </div>
 
-  {% if object_list %}
-    <ul>
-      {% for spot in object_list %}
-        <li>
-          {{ spot }}
+    <div class="view__body">
+      {% if object_list %}
+        {% for spot in object_list %}
+          <div class="panel">
+            <div class="panel__title">
+              {{ spot.name }}
+            </div>
 
-          <a
-            href="{% url 'spots_update' spot.pk %}"
-          >Редактировать</a>
+            <div class="panel__body">
+              Количество условий - {{ spot.condition_set.count }}
+            </div>
 
-          |
-
-          <a
-            href="{% url 'conditions_list' spot.pk %}"
-          >Условия</a>
-
-          |
-
-          <a
-            href="{% url 'conditions_create' spot.pk %}"
-          >Добавить условие</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    Спотов пока нет.
-  {% endif %}
+            <div class="panel__actions">
+              <a class="btn btn-outline-dark" href="{% url 'conditions_create' spot.pk %}">Добавить условие</a>
+              <a class="btn btn-outline-dark" href="{% url 'conditions_list' spot.pk %}">Просмотреть условия</a>
+              <a class="btn btn-outline-dark" href="{% url 'spots_update' spot.pk %}">Редактировать</a>
+              <button
+                class="btn btn-outline-dark delete_button"
+                data-url="{% url 'spots_delete' spot.pk %}"
+              >Удалить</button>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="mb-4">Спотов пока нет</div>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block footer %}
+    <script type="text/javascript" src="{% static 'js/deleteButton.js' %}"></script>
 {% endblock %}

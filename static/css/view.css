@@ -1,0 +1,24 @@
+.view {
+
+}
+
+.view__title {
+    margin-bottom: 28px;
+}
+
+.view__title h1 {
+    margin: 0;
+}
+
+.view__body {
+
+}
+
+.view__actions {
+    display: flex;
+    justify-content: end;
+}
+
+.view__actions > *:not(:first-child) {
+    margin-left: 6px;
+}

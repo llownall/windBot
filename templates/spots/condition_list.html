@@ -1,30 +1,77 @@
 {% extends 'base_user.html' %}
 
+{% load static %}
+{% load spots_filters %}
+
+{% block head %}
+  {{ block.super }}
+
+  <style>
+      .inactive {
+          color: #a2a2a2;
+      }
+
+      .condition_data {
+          margin: 6px 0;
+          padding: 4px 8px;
+          border-radius: 6px;
+          background-color: #edf3ed;
+      }
+
+      .condition_data:first-of-type, .condition_data:last-of-type {
+          margin: 0;
+      }
+  </style>
+{% endblock %}
+
 {% block main %}
-  <h1 class="page_title">Условия для спота</h1>
+  <div class="view">
+    <div class="view__title">
+      <h1>Условия для Cпота "{{ spot.name }}"</h1>
+    </div>
 
-  {% if object_list %}
-    <ul>
-      {% for condition in object_list %}
-        <li>
-          {{ condition }}
+    <div class="view__body">
+      {% if object_list %}
+        {% for condition in object_list %}
+          <div class="panel {% if not condition.is_active %}inactive{% endif %}">
+            <div class="panel__title">
+              Условие {{ condition.sequence_number|default_if_none:'?' }} - {% if not condition.is_active %}не{% endif %}активно
+            </div>
 
-          <a
-            href="{% url 'conditions_update' view.kwargs.spot_id condition.pk %}"
-          >Редактировать</a>
-{##}
-{#          |#}
-{##}
-{#          <a#}
-{#            href="{% url 'spots_update' spot.pk %}"#}
-{#          >Условия</a>#}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    Условий пока нет.
-  {% endif %}
+            <div class="panel__body">
+              <div class="condition_data">Скорость ветра от {{ condition.wind_speed_min }}
+                до {{ condition.wind_speed_max }} м/с
+              </div>
+              <div class="condition_data">Направления - {{ condition.wind_directions|to_wind_directions }}</div>
+              <div class="condition_data">Температура от {{ condition.temperature_min }}
+                до {{ condition.temperature_max }} °C
+              </div>
+            </div>
+
+            <div class="panel__actions">
+              <a class="btn btn-outline-dark" href="{% url 'conditions_update' view.kwargs.spot_id condition.pk %}">Редактировать</a>
+              <button
+                class="btn btn-outline-dark delete_button"
+                data-url="{% url 'conditions_delete' view.kwargs.spot_id condition.pk %}"
+              >Удалить
+              </button>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="mb-4">Условий пока нет</div>
+      {% endif %}
+    </div>
+
+    <div class="view__actions">
+      <a class="btn btn-dark" href="{% url 'conditions_create' view.kwargs.spot_id %}">Добавить условие</a>
+
+      {% url 'spots_list' as url %}
+      {% include 'components/back_button.html' with url=url %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block footer %}
+  <script type="text/javascript" src="{% static 'js/deleteButton.js' %}"></script>
 {% endblock %}

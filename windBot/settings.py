@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'windBot.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('SQL_DATABASE'),
-        'USER': os.environ.get('SQL_USER'),
-        'PASSWORD': os.environ.get('SQL_PASSWORD'),
-        'HOST': os.environ.get('SQL_HOST'),
-        'PORT': os.environ.get('SQL_PORT'),
+        'NAME': os.environ.get('SQL_DATABASE', 'wind_bot'),
+        'USER': os.environ.get('SQL_USER', 'admin'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', 'admin'),
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),
+        'PORT': os.environ.get('SQL_PORT', '5432'),
     }
 }
 
