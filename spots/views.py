@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView
 
-from spots.models import Spot, Condition
+from spots.models import Spot, Condition, FORM_WIND_DIRECTIONS
 
 
 class SpotList(LoginRequiredMixin, ListView):
@@ -60,6 +60,11 @@ class ConditionList(LoginRequiredMixin, ListView):
 
 
 class ConditionForm(forms.ModelForm):
+    wind_directions = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple(),
+        choices=FORM_WIND_DIRECTIONS,
+    )
+
     class Meta:
         model = Condition
         exclude = ('sequence_number', 'spot')

@@ -29,6 +29,12 @@ class WindDirection(models.IntegerChoices):
     NW = 8, _('Северо-Запад')
 
 
+FORM_WIND_DIRECTIONS = [
+    (value, label) for value, label in WindDirection.choices
+    if value not in [WindDirection.NO_WIND]
+]
+
+
 class Precipitation(models.IntegerChoices):
     __empty__ = _('Любые')
     NO = 1, _('Нет')
