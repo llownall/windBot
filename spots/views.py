@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView
 
+from base.forms import ExtendedForm
 from spots.models import Spot, Condition, FORM_WIND_DIRECTIONS
 
 
@@ -13,10 +14,14 @@ class SpotList(LoginRequiredMixin, ListView):
     model = Spot
 
 
-class SpotForm(forms.ModelForm):
+class SpotForm(ExtendedForm, forms.ModelForm):
     class Meta:
         model = Spot
-        exclude = ('creator',)
+        exclude = ('image', 'creator')
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'link_rp5': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 
 class SpotCreateView(LoginRequiredMixin, CreateView):
@@ -59,7 +64,7 @@ class ConditionList(LoginRequiredMixin, ListView):
         return queryset.filter(spot_id=self.kwargs['spot_id']).order_by('-is_active', 'sequence_number')
 
 
-class ConditionForm(forms.ModelForm):
+class ConditionForm(ExtendedForm, forms.ModelForm):
     wind_directions = forms.MultipleChoiceField(
         widget=forms.CheckboxSelectMultiple(),
         choices=FORM_WIND_DIRECTIONS,

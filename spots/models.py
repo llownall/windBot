@@ -43,11 +43,11 @@ class Precipitation(models.IntegerChoices):
 
 
 class Spot(models.Model):
-    name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='spots_images', null=True, blank=True)
+    name = models.CharField('Название', max_length=200)
+    image = models.ImageField('Картинка', upload_to='spots_images', null=True, blank=True)
     creator = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True, blank=True)
 
-    link_rp5 = models.URLField()
+    link_rp5 = models.URLField('Ссылка на сайте RP5')
 
     # link_windguru = models.URLField()
     # link_gismeteo = models.URLField()

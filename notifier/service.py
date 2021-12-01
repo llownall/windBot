@@ -32,7 +32,7 @@ class TelegramBot:
     def start_polling(self):
         self._setup_dispatcher()
 
-        self._bot.send_message(settings.TG_ADMIN_CHAT_ID, '👋')
+        self._bot.send_message(settings.TG_ADMIN_CHAT_ID, '👋', disable_notification=True)
 
         self._updater.start_polling()
         self._updater.idle()

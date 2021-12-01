@@ -1,0 +1,22 @@
+div[data-form-row] {
+    --label-width: 240px;
+    --between-width: 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div[data-form-row]:not(:last-child) {
+    margin-bottom: 1em;
+}
+
+div[data-form-row] label {
+    margin-bottom: 0;
+    width: var(--label-width);
+}
+
+div[data-form-row] input {
+    display: inline;
+    width: calc(100% - var(--label-width) - var(--between-width));
+}
