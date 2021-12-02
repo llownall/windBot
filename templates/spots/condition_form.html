@@ -1,12 +1,46 @@
 {% extends 'base_user.html' %}
 
+{% load static %}
+
+{% block head %}
+  {{ block.super }}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/form_styles.css' %}">
+{% endblock %}
+
 {% block main %}
-  <form method="post" enctype="multipart/form-data" >
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-  </form>
+  <div class="view">
+    <div class="view__title">
+      <h1>{% if is_create %}Добавление{% else %}Редактирование{% endif %} Условия</h1>
+    </div>
+
+    <div class="view__body">
+      <div class="panel">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="panel__body">
+            {{ form.as_div }}
+          </div>
+
+          <div class="panel__actions">
+            <button
+              class="btn btn-outline-dark"
+              type="submit"
+            >{% if is_create %}Добавить{% else %}Сохранить{% endif %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="view__actions">
+      {% url 'conditions_list' view.kwargs.spot_id as url %}
+      {% include 'components/back_button.html' with url=url %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block footer %}
+    <script type="text/javascript" src="{% static 'js/formPatcher.js' %}"></script>
 {% endblock %}

@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Quarion';
-    src: url('{% static ' fonts/quarion/Quarion-Medium.eot ' %}');
+    src: url('../fonts/quarion/Quarion-Medium.eot');
     src: local('Quarion Medium'), local('Quarion-Medium'),
-    url('{% static ' fonts/quarion/Quarion-Medium.eot?#iefix ' %}') format('embedded-opentype'),
-url('{% static 'fonts/quarion/Quarion-Medium.woff2' %}') format('woff2'),
-url('{% static 'fonts/quarion/Quarion-Medium.woff' %}') format('woff'),
-url('{% static 'fonts/quarion/Quarion-Medium.ttf' %}') format('truetype');
+    url('../fonts/quarion/Quarion-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/quarion/Quarion-Medium.woff2') format('woff2'),
+    url('../fonts/quarion/Quarion-Medium.woff') format('woff'),
+    url('../fonts/quarion/Quarion-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }

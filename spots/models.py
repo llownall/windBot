@@ -86,15 +86,15 @@ class Forecast(models.Model):
 
 class Condition(models.Model):
     sequence_number = models.IntegerField(null=True)
-    is_active = models.BooleanField()
+    is_active = models.BooleanField('Активно?')
     spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
 
-    wind_speed_min = models.IntegerField()
-    wind_speed_max = models.IntegerField()
+    wind_speed_min = models.IntegerField('Минимальная скорость ветра (м/с)')
+    wind_speed_max = models.IntegerField('Максимальная скорость ветра (м/с)')
     wind_directions = ArrayField(models.IntegerField(choices=WindDirection.choices))
 
-    temperature_min = models.IntegerField()
-    temperature_max = models.IntegerField()
+    temperature_min = models.IntegerField('Минимальная температура')
+    temperature_max = models.IntegerField('Максимальная температура')
 
     # precipitation = models.IntegerField(choices=Precipitation.choices)
 

@@ -66,6 +66,7 @@ class ConditionList(LoginRequiredMixin, ListView):
 
 class ConditionForm(ExtendedForm, forms.ModelForm):
     wind_directions = forms.MultipleChoiceField(
+        label='Направления ветра',
         widget=forms.CheckboxSelectMultiple(),
         choices=FORM_WIND_DIRECTIONS,
     )
@@ -87,6 +88,11 @@ class ConditionForm(ExtendedForm, forms.ModelForm):
 class ConditionCreateView(LoginRequiredMixin, CreateView):
     model = Condition
     form_class = ConditionForm
+    
+    def get_context_data(self, **kwargs):
+        data = super(ConditionCreateView, self).get_context_data(**kwargs)
+        data['is_create'] = True
+        return data
 
     def get_success_url(self):
         return reverse_lazy('conditions_list', kwargs=dict(spot_id=self.kwargs['spot_id']))

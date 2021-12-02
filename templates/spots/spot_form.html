@@ -13,7 +13,7 @@
 {% block main %}
   <div class="view">
     <div class="view__title">
-      <h1>Добавление Спота</h1>
+      <h1>{% if is_create %}Добавление{% else %}Редактирование{% endif %} Спота</h1>
     </div>
 
     <div class="view__body">
@@ -36,10 +36,12 @@
       </div>
     </div>
 
-    <div class="view__actions">
-      {% url 'spots_list' as url %}
-      {% include 'components/back_button.html' with url=url %}
-    </div>
+    {% if not is_create %}
+      <div class="view__actions">
+        {% url 'spots_list' as url %}
+        {% include 'components/back_button.html' with url=url %}
+      </div>
+    {% endif %}
   </div>
 {% endblock %}
 

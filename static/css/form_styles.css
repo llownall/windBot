@@ -18,5 +18,8 @@ div[data-form-row] label {
 
 div[data-form-row] input {
     display: inline;
+}
+
+div[data-form-row] input:not([type=checkbox]) {
     width: calc(100% - var(--label-width) - var(--between-width));
 }
