@@ -9,58 +9,7 @@
   <link href="{% static 'bootstrap-5.0.2/css/bootstrap.css' %}" rel="stylesheet">
   <script src="{% static 'bootstrap-5.0.2/js/bootstrap.js' %}"></script>
 
-  <style>
-    {# TODO: move base styles to .css file #}
-
-    @font-face {
-        font-family: 'Quarion';
-        src: url('{% static 'fonts/quarion/Quarion-Medium.eot' %}');
-        src: local('Quarion Medium'), local('Quarion-Medium'),
-        url('{% static 'fonts/quarion/Quarion-Medium.eot?#iefix' %}') format('embedded-opentype'),
-        url('{% static 'fonts/quarion/Quarion-Medium.woff2' %}') format('woff2'),
-        url('{% static 'fonts/quarion/Quarion-Medium.woff' %}') format('woff'),
-        url('{% static 'fonts/quarion/Quarion-Medium.ttf' %}') format('truetype');
-        font-weight: 500;
-        font-style: normal;
-    }
-
-    * {
-        font-family: 'Quarion';
-        font-weight: 500;
-        font-style: normal;
-    }
-
-    body {
-        background-color: #e9f1e9;
-    }
-
-    header {
-        background-color: #d4e1ce;
-    }
-
-    nav, main {
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    nav {
-        max-width: 900px;
-    }
-
-    main {
-        max-width: 800px;
-        padding: 32px 0;
-    }
-
-    .page_title {
-        padding-bottom: 28px;
-        margin: 0;
-    }
-
-    .grown {
-        flex: 1 1 auto;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 
   {% block head %}
   {% endblock %}

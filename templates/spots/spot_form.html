@@ -35,6 +35,11 @@
         </form>
       </div>
     </div>
+
+    <div class="view__actions">
+      {% url 'spots_list' as url %}
+      {% include 'components/back_button.html' with url=url %}
+    </div>
   </div>
 {% endblock %}
 
