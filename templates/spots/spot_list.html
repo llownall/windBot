@@ -14,8 +14,17 @@
       {% if object_list %}
         {% for spot in object_list %}
           <div class="panel">
-            <div class="panel__title">
-              {{ spot.name }}
+            <div class="panel__title d-flex justify-content-between">
+              <div>
+                {{ spot.name }}
+              </div>
+
+              <div>
+                <a
+                  href="{{ spot.link_rp5 }}"
+                  target="_blank"
+                >ссылка rp5</a>
+              </div>
             </div>
 
             <div class="panel__body">
