@@ -27,14 +27,12 @@ DAYS_FORWARD_AMOUNT = 4
 
 @app.task(bind=True)
 def clean_up_database(self):
-    # def clean_up_database():
     """Remove ForecastDays and related Forecasts."""
     ForecastDay.objects.filter(date__lt=timezone.now().date()).delete()
 
 
 @app.task(bind=True)
 def update_forecasts(self):
-    # def update_forecasts():
     """Gets forecasts for each spot for some days forward except today."""
 
     # logging.info('update_forecasts start')
@@ -55,7 +53,6 @@ def update_forecasts(self):
 
 @app.task(bind=True)
 def notify_users(self):
-    # def notify_users():
     """Notifies users based on theirs spot conditions."""
 
     for person in Person.objects.filter(spot__isnull=False, telegram_id__isnull=False):
@@ -78,57 +75,3 @@ def notify_users(self):
 
                     # Go to next spot
                     break
-
-# @app.task(bind=True)
-# def update_forecasts(self):
-#     logging.info('update_forecasts start')
-#
-#     for spot in Spot.objects.all():
-#         local_forecasts = weather_parser.get_forecasts(spot)
-#
-#         for forecast_day in local_forecasts:
-#             if not forecast_day.forecasts:
-#                 continue
-#
-#             day_was_notified = models.ForecastDay.select() \
-#                                    .where(models.ForecastDay.spot_name == spot.name,
-#                                           models.ForecastDay.date == forecast_day.date).count() > 0
-#
-#             if not day_was_notified:
-#                 wind_min_max = max([forecast.wind_min_speed for forecast in forecast_day.forecasts])
-#                 wind_max_max = max([forecast.wind_max_speed for forecast in forecast_day.forecasts])
-#                 temperature_max = max([forecast.temperature for forecast in forecast_day.forecasts])
-#
-#                 has_right_direction = False
-#                 for forecast in forecast_day.forecasts:
-#                     if weather_parser.rp5_directions[forecast.wind_direction] in spot.directions:
-#                         has_right_direction = True
-#                         break
-#
-#                 if wind_min_max >= conditions['min_wind_speed'] and \
-#                         temperature_max >= conditions['min_temperature'] and has_right_direction:
-#                     models.ForecastDay.create(
-#                         date=forecast_day.date,
-#                         spot_name=spot.name,
-#                     )
-#
-#                     context.bot.send_photo(
-#                         CHAT_ID,
-#                         spot.image,
-#                         reply_markup=InlineKeyboardMarkup(
-#                             [[InlineKeyboardButton('Сайт rp5.ru', url=spot.link)]]
-#                         )
-#                     )
-#                     context.bot.send_poll(
-#                         CHAT_ID,
-#                         '%s - Катальный день!\n'
-#                         'Фон до %s м/c, порывы до %s м/c\n'
-#                         'Макс. температура +%s°C' % (humanize_day_delta(forecast_day.date), wind_min_max,
-#                                                      wind_max_max, temperature_max),
-#                         ['Едем!', 'Пропускаю :('],
-#                         is_anonymous=False,
-#                     )
-#                     time.sleep(5)
-#                     break
-#
-#     logging.info('update_forecasts end')

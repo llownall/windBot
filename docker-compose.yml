@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=332503
       - POSTGRES_DB=wind_bot
   redis:
-    image: redis
+    image: redis:alpine
     ports:
       - "6379:6379"
   web:
