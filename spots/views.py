@@ -75,6 +75,10 @@ class ConditionForm(ExtendedForm, forms.ModelForm):
         model = Condition
         exclude = ('sequence_number', 'spot')
 
+    def clean_wind_directions(self):
+        wind_directions = self.cleaned_data['wind_directions']
+        return list(map(int, wind_directions))
+
     def clean(self):
         super(ConditionForm, self).clean()
 
