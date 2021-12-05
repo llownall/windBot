@@ -37,3 +37,11 @@
     </nav>
   </header>
 {% endblock %}
+
+{% block main_before %}
+  {% if not user.person.telegram_id %}
+    <div class="alert alert-warning" role="alert">
+      Ты не можешь получать прогнозы. Перейди в настройки и привяжи telegram аккаунт, чтобы это исправить.
+    </div>
+  {% endif %}
+{% endblock %}
