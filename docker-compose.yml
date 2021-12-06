@@ -11,6 +11,7 @@ services:
       - POSTGRES_DB=wind_bot
   redis:
     image: redis:alpine
+    user: redis
     ports:
       - "6379:6379"
   web:
